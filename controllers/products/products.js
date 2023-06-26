@@ -3,7 +3,7 @@ const productModel = require("../../models/product")
 module.exports.addProduct = async (req, res) => {
     try{
 
-        const {title, sku, price, image} = req.body;
+        const {title, sku, price, image,sellerEmail} = req.body;
 
         if(!title || !sku || !price) return res.send("Fields are empty")
 

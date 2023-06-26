@@ -34,8 +34,9 @@ const upload = multer({ storage: storage })
 const { register, login, updateUser, deleteUser, userById, resetPassword } = require("./controllers/auth/auth");
 const { addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
 const { checkout, addToCart, cart, removeFromCart } = require("./controllers/user/cart")
-const { isAdmin, checkAuth } = require("./controllers/middlewares/auth");
+const { isAdmin, isSeller,checkAuth } = require("./controllers/middlewares/auth");
 const { dashboardData, getAllUsers } = require('./controllers/admin/dashboard');
+const { sellerDashboard } = require('./controllers/seller/sellerDashboard');
 const { getAllOrders, changeStatusOfOrder } = require('./controllers/admin/orders');
 const { orders } = require('./controllers/user/orders');
 const { addCategory, getCategories, updateCategory, deleteCategory } = require('./controllers/categories/category');
@@ -61,7 +62,7 @@ app.post("/reset-password", resetPassword)
 
 
 // Products
-app.post("/product", [isAdmin], addProduct)
+app.post("/product", addProduct)
 app.get("/products", getAllProducts)
 app.post("/update-product", [isAdmin], updateProduct)
 app.get("/delete-product", [isAdmin], deleteProduct)
@@ -90,6 +91,9 @@ app.get("/dashboard",[isAdmin],dashboardData)
 app.get("/admin/orders",[isAdmin],getAllOrders)
 app.get("/admin/order-status",[isAdmin],changeStatusOfOrder)
 app.get("/admin/users",[isAdmin],getAllUsers)
+
+//SELLER
+app.get("/sellerDashboard/:sellerEmail",sellerDashboard)
   
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  

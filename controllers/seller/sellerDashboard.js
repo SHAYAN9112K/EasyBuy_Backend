@@ -32,4 +32,29 @@ module.exports.sellerDashboard = async (req, res) => {
 
 }
 
+module.exports.getAllSellerProducts = async (req, res) => {
+    try{
+
+        // Search through title names
+        var {search} = req.query
+        if(!search) search = ""
+
+        const products = await productModel.find({"sellerEmail": {$eq:req.params.sellerEmail}})
+            .populate("category")
+
+        return res.json({
+            success : true,
+            status : 200,
+            message : "list of products",
+            data : products
+        })
+
+    }catch(error){
+        return res.json({
+            success : false,
+            status : 400,
+            message : error.message
+        })
+    }
+}
 

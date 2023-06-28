@@ -42,6 +42,7 @@ module.exports.getProducts = async (req, res) => {
 
 
 module.exports.updateProduct = async (req, res) => {
+    console.log("edit product hitted")
     try{
 
         const {title, sku, price, image} = req.body;
@@ -70,6 +71,7 @@ module.exports.updateProduct = async (req, res) => {
         }
 
     }catch(error){
+        console.log("error is :"+error)
         return res.send(error.message)
     }
 }

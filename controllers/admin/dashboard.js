@@ -49,3 +49,23 @@ module.exports.getAllUsers = async (req, res) => {
     }
 
 }
+
+module.exports.getAllRider = async (req, res) => {
+
+    try{
+
+        // all users
+        const users = await userModel.find({"userType":"RIDER"})
+            .select("-password -token")
+
+        return res.json({
+            success : true,
+            message : "all Riders",
+            data : users
+        })
+
+    }catch(error){
+        res.send(error.message)
+    }
+
+}

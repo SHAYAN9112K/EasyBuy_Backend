@@ -35,7 +35,7 @@ const { register, login, updateUser, deleteUser, userById, resetPassword } = req
 const { addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
 const { checkout, addToCart, cart, removeFromCart } = require("./controllers/user/cart")
 const { isAdmin, isSeller,checkAuth } = require("./controllers/middlewares/auth");
-const { dashboardData, getAllUsers } = require('./controllers/admin/dashboard');
+const { dashboardData, getAllUsers,getAllRider } = require('./controllers/admin/dashboard');
 const { sellerDashboard ,getAllSellerProducts} = require('./controllers/seller/sellerDashboard');
 const { getAllOrders, changeStatusOfOrder,getMyOrders } = require('./controllers/admin/orders');
 const { orders } = require('./controllers/user/orders');
@@ -99,7 +99,7 @@ app.get("/sellerDelete-product", deleteProduct)
 app.post("/sellerUpdate-product",updateProduct)
 app.get("/seller/orders",getAllOrders)
 app.get("/seller/myorders/:sellerEmail",getMyOrders)
-
+app.get("/seller/getRiders",getAllRider)
   
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  

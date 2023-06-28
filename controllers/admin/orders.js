@@ -24,6 +24,33 @@ module.exports.getAllOrders = async (req, res) => {
     }
 }
 
+module.exports.getMyOrders = async (req, res) => {
+    try{
+
+        // const products = await productModel.find({"sellerEmail": {$eq:req.params.sellerEmail}})
+        //     .populate("category")
+
+        const orders = await ordersModel.find({"items.sellerEmail": {$eq:req.params.sellerEmail}})
+            .populate({path : "user" , select : "-password -token"})
+            .populate("items.productId")
+            .populate("items.categoryId")
+
+        const ordersCount = await ordersModel.find({"items.sellerEmail": {$eq:req.params.sellerEmail}}).count()
+
+        return res.json({
+            success : true,
+            message : "all orders",
+            status : 200,
+            data : orders,
+            ordersCount
+        })
+
+    }catch(error){
+
+        return res.send(error.message)
+    }
+}
+
 module.exports.getCurrentDate = async () => {
 
     var today = new Date();

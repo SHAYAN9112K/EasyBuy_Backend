@@ -10,7 +10,8 @@ const orderSchema = mongoose.Schema({
                 productId : {type: mongoose.Schema.Types.ObjectId, ref : "product"}, 
                 categoryId : {type: mongoose.Schema.Types.ObjectId, ref : "categories"},
                 quantity : Number, 
-                price : Number
+                price : Number,
+                sellerEmail:String
             }
         ],
     amount : Number,

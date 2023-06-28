@@ -37,7 +37,7 @@ const { checkout, addToCart, cart, removeFromCart } = require("./controllers/use
 const { isAdmin, isSeller,checkAuth } = require("./controllers/middlewares/auth");
 const { dashboardData, getAllUsers } = require('./controllers/admin/dashboard');
 const { sellerDashboard ,getAllSellerProducts} = require('./controllers/seller/sellerDashboard');
-const { getAllOrders, changeStatusOfOrder } = require('./controllers/admin/orders');
+const { getAllOrders, changeStatusOfOrder,getMyOrders } = require('./controllers/admin/orders');
 const { orders } = require('./controllers/user/orders');
 const { addCategory, getCategories, updateCategory, deleteCategory } = require('./controllers/categories/category');
 const { addToWishlist, wishlist, removeFromWishlist } = require('./controllers/user/wishlist');
@@ -97,6 +97,9 @@ app.get("/sellerDashboard/:sellerEmail",sellerDashboard)
 app.get("/sellerProducts/:sellerEmail", getAllSellerProducts)
 app.get("/sellerDelete-product", deleteProduct)
 app.post("/sellerUpdate-product",updateProduct)
+app.get("/seller/orders",getAllOrders)
+app.get("/seller/myorders/:sellerEmail",getMyOrders)
+
   
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  

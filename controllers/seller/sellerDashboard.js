@@ -1,4 +1,4 @@
-const orderModel = require("../../models/order")
+const ordersModel = require("../../models/order")
 const userModel = require("../../models/user")
 const productModel = require("../../models/product")
 const categoryModel = require("../../models/category")
@@ -9,7 +9,7 @@ module.exports.sellerDashboard = async (req, res) => {
     try{
 
         // counts 
-        const ordersCount = await orderModel.find().count()
+        const ordersCount = await ordersModel.find({"items.sellerEmail": {$eq:req.params.sellerEmail}}).count()
         // User.find({"publications": {$eq:req.params.id}}).exec()
         const usersCount = await userModel.find().count()
         const productsCount = await productModel.find({"sellerEmail": {$eq:req.params.sellerEmail}}).count()

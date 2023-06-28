@@ -18,7 +18,7 @@ const orderSchema = mongoose.Schema({
     discount : Number,
     shippingAddress : String,
     riderEmail:String,
-    status : {type : String, enum : ["pending", "shipped", "delivered"]},
+    status : {type : String, enum : ["pending","Sent To Rider","Shipped", "delivered"]},
     country : {type : String},
     city : {type : String},
     zipcode : {type : String},

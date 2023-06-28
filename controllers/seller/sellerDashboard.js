@@ -9,20 +9,20 @@ module.exports.sellerDashboard = async (req, res) => {
     try{
 
         // counts 
-        const ordersCount = await ordersModel.find({"items.sellerEmail": {$eq:req.params.sellerEmail}}).count()
+        const PendingOrdersCount = await ordersModel.find({"items.sellerEmail": {$eq:req.params.sellerEmail},"status": {$eq: "pending"}}).count()
         // User.find({"publications": {$eq:req.params.id}}).exec()
-        const usersCount = await userModel.find().count()
+        const ProgressOrdersCount = await ordersModel.find({"items.sellerEmail": {$eq:req.params.sellerEmail},"status": {$in: ["Sent To Rider", "Shipped"]}}).count()
         const productsCount = await productModel.find({"sellerEmail": {$eq:req.params.sellerEmail}}).count()
-        const categoriesCount = await categoryModel.find().count()
+        const DeliveredOrdersCount = await ordersModel.find({"items.sellerEmail": {$eq:req.params.sellerEmail},"status": {$eq: "delivered"}}).count()
 
         return res.json({
             success : true,
             message : "dashboard data",
             data : {
-                ordersCount,
-                usersCount,
+                PendingOrdersCount,
+                ProgressOrdersCount,
                 productsCount,
-                categoriesCount
+                DeliveredOrdersCount
             }
         })
 
@@ -33,6 +33,36 @@ module.exports.sellerDashboard = async (req, res) => {
 }
 
 module.exports.getAllSellerProducts = async (req, res) => {
+    try{
+
+        // Search through title names
+        // var {search} = req.query
+        // if(!search) search = ""
+
+        const {sellerEmail} = req.query;
+
+        const products = await productModel.find({"sellerEmail": {$eq:req.params.sellerEmail}})
+            .populate("category")
+
+        return res.json({
+            success : true,
+            status : 200,
+            message : "list of products",
+            data : products
+        })
+
+    }catch(error){
+        return res.json({
+            success : false,
+            status : 400,
+            message : error.message
+        })
+    }
+}
+
+
+
+module.exports.getFilteredSellerProducts = async (req, res) => {
     try{
 
         // Search through title names
@@ -57,4 +87,5 @@ module.exports.getAllSellerProducts = async (req, res) => {
         })
     }
 }
+
 

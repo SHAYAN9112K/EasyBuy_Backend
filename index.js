@@ -37,6 +37,7 @@ const { checkout, addToCart, cart, removeFromCart } = require("./controllers/use
 const { isAdmin, isSeller,checkAuth } = require("./controllers/middlewares/auth");
 const { dashboardData, getAllUsers,getAllRider } = require('./controllers/admin/dashboard');
 const { sellerDashboard ,getAllSellerProducts} = require('./controllers/seller/sellerDashboard');
+const { getRiderOrders ,setRiderEmail} = require('./controllers/rider/riderOrders');
 const { getAllOrders, changeStatusOfOrder,getMyOrders } = require('./controllers/admin/orders');
 const { orders } = require('./controllers/user/orders');
 const { addCategory, getCategories, updateCategory, deleteCategory } = require('./controllers/categories/category');
@@ -100,6 +101,10 @@ app.post("/sellerUpdate-product",updateProduct)
 app.get("/seller/orders",getAllOrders)
 app.get("/seller/myorders/:sellerEmail",getMyOrders)
 app.get("/seller/getRiders",getAllRider)
+
+//RIDER
+app.get("/rider/getMyOrders/:riderEmail",getRiderOrders)
+app.patch("/rider/update/:shippingAddress",setRiderEmail)
   
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  

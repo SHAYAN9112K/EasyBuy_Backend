@@ -9,7 +9,7 @@ const productSchema = mongoose.Schema({
     description : String,
     category : {type:mongoose.Schema.Types.ObjectId, ref:'categories'},
     quantity : Number,
-    sellerEmail:String
+    sellerEmail:String,
 
 }, { timestamps : true })
 

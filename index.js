@@ -104,7 +104,7 @@ app.get("/seller/getRiders",getAllRider)
 
 //RIDER
 app.get("/rider/getMyOrders/:riderEmail",getRiderOrders)
-app.patch("/rider/update/:shippingAddress",setRiderEmail)
+app.patch("/rider/updateOrder",setRiderEmail)
   
 // HELPER
 app.post('/photos/upload', upload.array('photos', 12), function (req, res, next) {  

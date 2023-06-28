@@ -35,11 +35,13 @@ module.exports.setRiderEmail = async (req, res) => {
     try{
 
         
-        var {search} = req.query
-        if(!search) search = ""
+        // var {search} = req.query
+        // if(!search) search = ""
+
+        const {id} = req.query;
 
     
-        const updatedorders= await ordersModel.findOneAndUpdate({"shippingAddress": {$eq:req.params.shippingAddress}}, req.body, {new :true})
+        const updatedorders= await ordersModel.findOneAndUpdate({_id : id}, req.body, {new :true})
 
         return res.json({
             success : true,

@@ -35,7 +35,7 @@ const { register, login, updateUser, deleteUser, userById, resetPassword } = req
 const { addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
 const { checkout, addToCart, cart, removeFromCart } = require("./controllers/user/cart")
 const { isAdmin, isSeller,checkAuth } = require("./controllers/middlewares/auth");
-const { dashboardData, getAllUsers,getAllRider,getAllSellers,deletePerson} = require('./controllers/admin/dashboard');
+const { dashboardData, getAllUsers,getAllRider,getAllSellers,deletePerson,banPerson,unBanPerson} = require('./controllers/admin/dashboard');
 const { sellerDashboard ,getAllSellerProducts,getFilteredSellerProducts} = require('./controllers/seller/sellerDashboard');
 const { getRiderOrders ,setRiderEmail} = require('./controllers/rider/riderOrders');
 const { getAllOrders, changeStatusOfOrder,getMyOrders } = require('./controllers/admin/orders');
@@ -95,6 +95,8 @@ app.get("/admin/users",[isAdmin],getAllUsers)
 app.get("/admin/riders",[isAdmin],getAllRider)
 app.get("/admin/sellers",[isAdmin],getAllSellers)
 app.delete("/admin/person",deletePerson)
+app.patch("/admin/banPerson",banPerson)
+app.patch("/admin/UnbanPerson",unBanPerson)
 
 
 

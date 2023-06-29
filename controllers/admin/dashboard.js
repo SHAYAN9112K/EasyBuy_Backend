@@ -114,3 +114,60 @@ module.exports.deletePerson = async (req, res) => {
         return res.send(error.message)
     } 
 }
+
+module.exports.banPerson = async (req, res) => {
+    try{
+
+        
+        // var {search} = req.query
+        // if(!search) search = ""
+
+        const {id} = req.query;
+
+    
+        const updatedorders= await userModel.findOneAndUpdate({_id : id}, req.body, {new :true})
+
+        return res.json({
+            success : true,
+            status : 200,
+            message : "User Baned",
+            data : updatedorders
+        })
+
+    }catch(error){
+        return res.json({
+            success : false,
+            status : 400,
+            message : error.message
+        })
+    }
+}
+
+
+module.exports.unBanPerson = async (req, res) => {
+    try{
+
+        
+        // var {search} = req.query
+        // if(!search) search = ""
+
+        const {id} = req.query;
+
+    
+        const updatedorders= await userModel.findOneAndUpdate({_id : id}, req.body, {new :true})
+
+        return res.json({
+            success : true,
+            status : 200,
+            message : "User Unbaned",
+            data : updatedorders
+        })
+
+    }catch(error){
+        return res.json({
+            success : false,
+            status : 400,
+            message : error.message
+        })
+    }
+}

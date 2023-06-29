@@ -35,7 +35,7 @@ const { register, login, updateUser, deleteUser, userById, resetPassword } = req
 const { addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
 const { checkout, addToCart, cart, removeFromCart } = require("./controllers/user/cart")
 const { isAdmin, isSeller,checkAuth } = require("./controllers/middlewares/auth");
-const { dashboardData, getAllUsers,getAllRider } = require('./controllers/admin/dashboard');
+const { dashboardData, getAllUsers,getAllRider,getAllSellers,deletePerson} = require('./controllers/admin/dashboard');
 const { sellerDashboard ,getAllSellerProducts,getFilteredSellerProducts} = require('./controllers/seller/sellerDashboard');
 const { getRiderOrders ,setRiderEmail} = require('./controllers/rider/riderOrders');
 const { getAllOrders, changeStatusOfOrder,getMyOrders } = require('./controllers/admin/orders');
@@ -92,6 +92,11 @@ app.get("/dashboard",[isAdmin],dashboardData)
 app.get("/admin/orders",[isAdmin],getAllOrders)
 app.get("/admin/order-status",[isAdmin],changeStatusOfOrder)
 app.get("/admin/users",[isAdmin],getAllUsers)
+app.get("/admin/riders",[isAdmin],getAllRider)
+app.get("/admin/sellers",[isAdmin],getAllSellers)
+app.delete("/admin/person",deletePerson)
+
+
 
 //SELLER
 app.get("/sellerDashboard/:sellerEmail",sellerDashboard)

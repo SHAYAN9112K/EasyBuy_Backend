@@ -89,8 +89,8 @@ app.get("/remove-from-wishlist",[checkAuth],removeFromWishlist)
 
 // ADMIN
 app.get("/dashboard",[isAdmin],dashboardData)
-app.get("/admin/orders",[isAdmin],getAllOrders)
-app.get("/admin/order-status",[isAdmin],changeStatusOfOrder)
+app.get("/admin/orders",getAllOrders)
+app.get("/admin/order-status",changeStatusOfOrder)
 app.get("/admin/users",[isAdmin],getAllUsers)
 app.get("/admin/riders",[isAdmin],getAllRider)
 app.get("/admin/sellers",[isAdmin],getAllSellers)

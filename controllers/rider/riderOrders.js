@@ -4,14 +4,17 @@ const productModel = require("../../models/product")
 const categoryModel = require("../../models/category")
 
 module.exports.getRiderOrders = async (req, res) => {
-    console.log("hitttted")
     try{
 
         // Search through title names
         var {search} = req.query
         if(!search) search = ""
 
+    
         const products = await ordersModel.find({"riderEmail": {$eq:req.params.riderEmail}})
+        .populate({path : "user" , select : "-password -token"})
+            .populate("items.productId")
+            .populate("items.categoryId")
 
         return res.json({
             success : true,

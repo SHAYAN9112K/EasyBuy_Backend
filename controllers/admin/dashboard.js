@@ -2,6 +2,7 @@ const orderModel = require("../../models/order")
 const userModel = require("../../models/user")
 const productModel = require("../../models/product")
 const categoryModel = require("../../models/category")
+const imageModel = require("../../models/images")
 
 module.exports.dashboardData = async (req, res) => {
 
@@ -155,6 +156,47 @@ module.exports.unBanPerson = async (req, res) => {
 
     
         const updatedorders= await userModel.findOneAndUpdate({_id : id}, req.body, {new :true})
+
+        return res.json({
+            success : true,
+            status : 200,
+            message : "User Unbaned",
+            data : updatedorders
+        })
+
+    }catch(error){
+        return res.json({
+            success : false,
+            status : 400,
+            message : error.message
+        })
+    }
+}
+
+
+
+module.exports.saveImage = async (req, res) => {
+    try{
+
+        var imageFile=req.query.image;
+        var imageDetails=new imageModel({
+            imageName:imageFile
+        })
+
+        imageDetails.save(function(err,doc){
+            if(err) throw err;
+
+            console.log("success")
+        })
+
+        
+        // var {search} = req.query
+        // if(!search) search = ""
+
+        const {id} = req.query;
+
+    
+        const updatedorders= await imageModel.findOneAndUpdate({_id : id}, req.body, {new :true})
 
         return res.json({
             success : true,

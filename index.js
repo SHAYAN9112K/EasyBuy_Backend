@@ -31,11 +31,14 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
+
+
+
 const { register, login, updateUser, deleteUser, userById, resetPassword } = require("./controllers/auth/auth");
 const { addProduct, updateProduct, deleteProduct, getAllProducts } = require("./controllers/products/products")
 const { checkout, addToCart, cart, removeFromCart } = require("./controllers/user/cart")
 const { isAdmin, isSeller,checkAuth } = require("./controllers/middlewares/auth");
-const { dashboardData, getAllUsers,getAllRider,getAllSellers,deletePerson,banPerson,unBanPerson} = require('./controllers/admin/dashboard');
+const { dashboardData, getAllUsers,getAllRider,getAllSellers,deletePerson,banPerson,unBanPerson,saveImage} = require('./controllers/admin/dashboard');
 const { sellerDashboard ,getAllSellerProducts,getFilteredSellerProducts} = require('./controllers/seller/sellerDashboard');
 const { getRiderOrders ,setRiderEmail} = require('./controllers/rider/riderOrders');
 const { getAllOrders, changeStatusOfOrder,getMyOrders } = require('./controllers/admin/orders');
@@ -43,6 +46,8 @@ const { orders } = require('./controllers/user/orders');
 const { addCategory, getCategories, updateCategory, deleteCategory } = require('./controllers/categories/category');
 const { addToWishlist, wishlist, removeFromWishlist } = require('./controllers/user/wishlist');
 const mongoose = require("./config/database")()
+
+
 
 
 app.get('/', (req, res) => {
@@ -108,6 +113,7 @@ app.post("/sellerUpdate-product",updateProduct)
 app.get("/seller/orders",getAllOrders)
 app.get("/seller/myorders/:sellerEmail",getMyOrders)
 app.get("/seller/getRiders",getAllRider)
+app.get("/seller/uploadImage",saveImage)
 app.get("/seller/getMyFilteredOrders/:riderEmail",getFilteredSellerProducts)
 
 //RIDER

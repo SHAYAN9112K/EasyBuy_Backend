@@ -24,7 +24,9 @@ const orderSchema = mongoose.Schema({
     zipcode : {type : String},
     payment_type : {type : String, enum: ["cod","online"]},
     shippedOn : {type : String},
-    deliveredOn : {type : String}
+    deliveredOn : {type : String},
+    customerLatitude:Number,
+    customerLongitude:Number
 
 }, { timestamps : true })
 
